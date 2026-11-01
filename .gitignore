@@ -1,6 +1,9 @@
-backend/__pycache__
-frontend/__pycache__
+__pycache__/
+*.py[cod]
+
 backend/vector_base/vector_db/
+json_data/*.json
+!json_data/sample_recipes.json
 
 /venv
 /.idea
