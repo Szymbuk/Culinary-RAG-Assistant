@@ -78,7 +78,19 @@ cd AlgorytmyTekstowe
 pip install -r requirements.txt
 ```
 
-**3. Uruchomienie GUI**
+**3. Konfiguracja opcjonalnego API Gemini**
+
+Wariant Gemini wymaga klucza API. Utwórz lokalny plik `.env` na podstawie
+`.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+Następnie uzupełnij `GEMINI_API_KEY`. Plik `.env` jest ignorowany przez Git i
+nie powinien być publikowany.
+
+**4. Uruchomienie GUI**
 ```bash
 python frontend/gui_app.py
 ```

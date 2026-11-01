@@ -21,6 +21,7 @@ dependencies = [
     "pandas>=3.1.0",
     "pandas-toon>=0.1.0",
     "pydantic>=2.14.2",
+    "python-dotenv>=1.2.4",
     "ragas>=0.4.3",
     "scrapy>=2.19.0",
     "sentence-transformers>=6.2.0",

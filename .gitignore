@@ -1,5 +1,8 @@
 __pycache__/
 *.py[cod]
+.env
+.env.*
+!.env.example
 
 backend/vector_base/vector_db/
 json_data/*.json

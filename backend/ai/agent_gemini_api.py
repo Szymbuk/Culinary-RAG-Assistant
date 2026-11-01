@@ -10,6 +10,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    raise RuntimeError(
+        "Brak GEMINI_API_KEY. Skopiuj .env.example do .env i uzupełnij klucz API."
+    )
 client = genai.Client(api_key=api_key)
 
 

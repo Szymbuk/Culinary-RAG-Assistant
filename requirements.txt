@@ -5,6 +5,7 @@ sentence-transformers
 lancedb
 pandas
 pandas-toon
+python-dotenv
 ragas
 langchain
 langchain-community
