@@ -66,10 +66,15 @@ class KwestiaSmakuSpider(scrapy.Spider):
         for item_url in links:
             yield scrapy.Request(item_url, self.parse_item)
         
-        next_page = (
-            soup.select_one('ul.pagination li.next a') or
-            soup.find('a', string='dalej')
-        )
+        next_page = soup.select_one('ul.pagination li.next a')
+        if next_page is None:
+            next_page = next(
+                (
+                    link for link in soup.find_all('a')
+                    if link.get_text(strip=True).lower() == 'dalej'
+                ),
+                None,
+            )
         if next_page and next_page.get('href'):
             yield response.follow(next_page['href'], self.parse)
 
@@ -91,7 +96,10 @@ class KwestiaSmakuSpider(scrapy.Spider):
             script = soup.find('script', type='application/ld+json')
             if script:
                 try:
-                    data = json.loads(script.string)
+                    script_text = script.string
+                    if not isinstance(script_text, str):
+                        return
+                    data = json.loads(script_text)
                     if isinstance(data, list):
                         for item in data:
                             if item.get('@type') == 'Recipe':

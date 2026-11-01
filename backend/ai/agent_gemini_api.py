@@ -2,8 +2,9 @@
 
 from google import genai
 from google.genai import types
-from ai.CulinaryResponse import CulinaryResponse, Crucial,NormalizedIngredients
+from ai.culinary_response import CulinaryResponse, Crucial, NormalizedIngredients
 import os
+from typing import Any
 from dotenv import load_dotenv
 
 
@@ -13,10 +14,10 @@ client = genai.Client(api_key=api_key)
 
 
 
-def _clean_schema(schema: dict) -> dict:
+def _clean_schema(schema: dict[str, Any]) -> dict[str, Any]:
     defs = schema.get("$defs", {})
 
-    def _inline_refs(obj):
+    def _inline_refs(obj: Any) -> Any:
         if isinstance(obj, dict):
             if "$ref" in obj:
 
@@ -33,7 +34,7 @@ def _clean_schema(schema: dict) -> dict:
 
     unsupported = {"additionalProperties", "$defs", "$ref", "title", "default"}
 
-    def _strip(obj):
+    def _strip(obj: Any) -> Any:
         if isinstance(obj, dict):
             return {k: _strip(v) for k, v in obj.items() if k not in unsupported}
         elif isinstance(obj, list):
@@ -43,7 +44,9 @@ def _clean_schema(schema: dict) -> dict:
     return _strip(inlined)
 
 
-def _clean_response(text: str) -> str:
+def _clean_response(text: str | None) -> str:
+    if text is None:
+        raise RuntimeError("Model Gemini zwrócił odpowiedź bez treści.")
     text = text.strip()
     if text.startswith("```"):
         text = text[text.index("\n") + 1:] if "\n" in text else text

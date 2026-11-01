@@ -86,3 +86,22 @@ python frontend/gui_app.py
 Przy pierwszym uruchomieniu aplikacja:
 - pobierze model embeddingowy `sdadas/mmlw-retrieval-roberta-large`,
 - zbuduje bazę wektorową w `backend/vector_base/vector_db/` z plików w `json_data/` (jeśli jeszcze nie istnieje).
+
+### Dane lokalne
+
+Pełne zbiory przepisów oraz wygenerowana baza LanceDB nie są przechowywane w
+repozytorium. Są to dane generowane lokalnie przez crawlery i mogą podlegać
+ograniczeniom licencyjnym źródeł. Repozytorium zawiera jedynie
+`json_data/sample_recipes.json` do szybkiego testu.
+
+Aby odtworzyć pełny zbiór, uruchom wybrany scraper z katalogu `backend/`,
+na przykład:
+
+```bash
+python backend/scrapers/spider_pycha.py
+```
+
+Po zapisaniu danych w `json_data/` uruchom aplikację, aby automatycznie
+wygenerowała lokalną bazę w `backend/vector_base/vector_db/`. Katalogi
+`json_data/` (poza próbką) i `backend/vector_base/vector_db/` są celowo
+ignorowane przez Git.

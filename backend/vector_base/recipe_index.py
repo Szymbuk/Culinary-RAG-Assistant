@@ -35,4 +35,6 @@ class RecipeIndex:
 
     def search(self, query_vec: np.ndarray, k: int = 5) -> pd.DataFrame:
         """Wyszukiwanie kosinusowe (1 - dystans = podobieństwo)."""
+        if self.tbl is None:
+            raise RuntimeError("Indeks przepisów nie zawiera tabeli do wyszukiwania.")
         return self.tbl.search(query_vec.tolist()).metric("cosine").limit(k).to_pandas()

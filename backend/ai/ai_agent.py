@@ -1,6 +1,6 @@
 import ollama as ol
 import time
-from backend.ai.CulinaryResponse import CulinaryResponse, Crucial, NormalizedIngredients
+from backend.ai.culinary_response import CulinaryResponse, Crucial, NormalizedIngredients
 
 
 def add_crucial_ingredients(model_name, user_ing_prompt, sys_ing_prompt):

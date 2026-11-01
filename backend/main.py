@@ -45,6 +45,8 @@ if __name__ == '__main__':
             print("✅ Gotowe!")
 
 
+        if searcher is None:
+            raise RuntimeError("Wyszukiwarka nie została zainicjalizowana.")
         base = searcher.search(ingredients, k=10)
         print(base)
 

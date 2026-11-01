@@ -1,5 +1,5 @@
 from pathlib import Path
-from recipe_parser import parse_recipe_ingredients
+from backend.vector_base.recipe_parser import parse_recipe_ingredients
 import json
 
 project_main_directory = Path(__file__).resolve().parent.parent.parent

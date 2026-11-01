@@ -187,6 +187,8 @@ def process_ingredients(ingredients_text: str, status_callback=None, output_call
     if status_callback:
         status_callback("Wyszukiwanie przepisów w bazie wektorowej...")
         
+    if searcher is None:
+        raise RuntimeError("Wyszukiwarka nie została zainicjalizowana.")
     base_results = searcher.search(ingredients, k=10)
 
     base_str = _format_base_results(base_results)

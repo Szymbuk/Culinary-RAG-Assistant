@@ -43,6 +43,8 @@ if __name__ == '__main__':
             watek_ladowania.join()  # Blokuje program, aż watek_ladowania skończy pracę
             print("✅ Gotowe!")
 
+        if searcher is None:
+            raise RuntimeError("Wyszukiwarka nie została zainicjalizowana.")
         base = searcher.search(ingredients, k=20)
 
         user_ing_prompt = get_user_ing_prompt(base)

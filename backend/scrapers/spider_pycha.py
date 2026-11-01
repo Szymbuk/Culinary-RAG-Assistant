@@ -1,11 +1,8 @@
 import scrapy
 import json
-from pathlib import Path
 from bs4 import BeautifulSoup
 from scrapy.crawler import CrawlerProcess
-import sys
-sys.path.append(str(Path(__file__).resolve().parent.parent))
-import recipe_assets
+from backend.vector_base import recipe_assets
 
 class MySpider(scrapy.Spider):
     name = 'my_spider'

@@ -61,7 +61,15 @@ class ZoltyZeszytSpider(scrapy.Spider):
         for item_url in links:
             yield scrapy.Request(item_url, self.parse_item)
         
-        next_page = soup.find('a', class_='next') or soup.find('a', string='Następna')
+        next_page = soup.select_one('a.next')
+        if next_page is None:
+            next_page = next(
+                (
+                    link for link in soup.find_all('a')
+                    if link.get_text(strip=True) == 'Następna'
+                ),
+                None,
+            )
         if next_page and next_page.get('href'):
             yield response.follow(next_page['href'], self.parse)
 
